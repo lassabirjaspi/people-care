@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People Care — Karriere i Spanien</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a3a5c;
+            --primary-light: #2a5a8c;
+            --primary-dark: #0f2440;
+            --accent: #4a90d9;
+            --accent-light: #e8f0fb;
+            --text: #1a1a2e;
+            --text-light: #555;
+            --bg: #ffffff;
+            --bg-alt: #f5f7fa;
+            --border: #e0e4ea;
+            --success: #2ecc71;
+            --warm: #f0a500;
+            --radius: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem; height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo { font-size: 1.3rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
+        .logo span { color: var(--accent); }
+        nav ul { list-style: none; display: flex; gap: 2rem; align-items: center; }
+        nav a { text-decoration: none; color: var(--text-light); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        nav a:hover { color: var(--primary); }
+        .nav-cta { background: var(--primary); color: #fff !important; padding: 0.5rem 1.2rem; border-radius: 8px; font-weight: 600; transition: background 0.2s; }
+        .nav-cta:hover { background: var(--primary-light); }
+        .nav-dropdown { position: relative; }
+        .nav-dropdown-toggle::after { content: " ▾"; font-size: 0.7em; }
+        .nav-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.5rem 0;
+            min-width: 200px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            z-index: 110;
+        }
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.88rem;
+            color: var(--text) !important;
+            font-weight: 500;
+            transition: background 0.15s;
+        }
+        .nav-dropdown-menu a:hover { background: var(--accent-light); color: var(--primary) !important; }
+        .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--text); margin: 5px 0; transition: 0.3s; }
+
+        /* ── HERO ── */
+        .hero {
+            padding: 10rem 2rem 6rem;
+            text-align: center;
+            background: linear-gradient(170deg, var(--accent-light) 0%, var(--bg) 60%);
+        }
+        .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; color: var(--primary-dark); max-width: 750px; margin: 0 auto 1.2rem; letter-spacing: -1px; }
+        .hero > .container > p { font-size: 1.15rem; color: var(--text-light); max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.7; }
+        .btn { display: inline-block; padding: 0.85rem 2rem; border-radius: 10px; font-weight: 600; font-size: 1rem; text-decoration: none; cursor: pointer; transition: all 0.25s; border: none; font-family: inherit; }
+        .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 14px rgba(26,58,92,0.25); }
+        .btn-primary:hover { background: var(--primary-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(26,58,92,0.3); }
+        .hero-badges { display: flex; justify-content: center; gap: 1.5rem; margin-top: 3rem; flex-wrap: wrap; }
+        .badge { background: #fff; border: 1px solid var(--border); padding: 0.6rem 1.2rem; border-radius: 50px; font-size: 0.85rem; color: var(--text-light); font-weight: 500; }
+        .badge strong { color: var(--primary); }
+
+        /* ── SECTIONS ── */
+        section { padding: 5rem 2rem; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .section-label { text-transform: uppercase; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; color: var(--accent); margin-bottom: 0.5rem; }
+        .section-title { font-size: clamp(1.8rem, 3.5vw, 2.4rem); font-weight: 800; color: var(--primary-dark); margin-bottom: 1rem; letter-spacing: -0.5px; }
+        .section-sub { font-size: 1.05rem; color: var(--text-light); max-width: 600px; line-height: 1.7; }
+
+        /* ── ABOUT ── */
+        .about { background: var(--bg-alt); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2.5rem; align-items: start; }
+        .about-card { background: #fff; padding: 2rem; border-radius: var(--radius); border: 1px solid var(--border); }
+        .about-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+        .about-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; }
+        .about-icon { width: 44px; height: 44px; background: var(--accent-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; font-size: 1.3rem; }
+
+        /* ── SPAIN SECTION ── */
+        .spain-highlight {
+            background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
+        }
+        .spain-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+        .spain-card {
+            background: #fff;
+            padding: 1.8rem;
+            border-radius: var(--radius);
+            border: 1px solid #f0e0a0;
+        }
+        .spain-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.4rem;
+        }
+        .spain-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        .spain-emoji {
+            font-size: 1.5rem;
+            margin-bottom: 0.7rem;
+        }
+
+        /* ── ROLES ── */
+        .roles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+        .role-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .role-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        }
+        .role-tag {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.7rem;
+            border-radius: 50px;
+            margin-bottom: 0.8rem;
+        }
+        .role-card h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+        .role-card p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .role-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .role-card ul li {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            padding: 0.2rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .role-card ul li::before {
+            content: "~";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        .role-link {
+            display: inline-block;
+            margin-top: 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .role-link:hover {
+            color: var(--primary);
+        }
+
+        /* ── BENEFITS ── */
+        .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2.5rem; }
+        .benefit-card { text-align: center; padding: 2rem 1.5rem; background: #fff; border-radius: var(--radius); border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; }
+        .benefit-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.06); }
+        .benefit-number { width: 48px; height: 48px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; margin: 0 auto 1rem; }
+        .benefit-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 0.5rem; }
+        .benefit-card p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
+
+        /* ── PROCESS ── */
+        .process { background: var(--bg-alt); }
+        .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+        .step { position: relative; background: #fff; padding: 1.8rem 1.5rem; border-radius: var(--radius); border: 1px solid var(--border); }
+        .step-num { font-size: 2rem; font-weight: 800; color: var(--accent); opacity: 0.3; margin-bottom: 0.5rem; }
+        .step h3 { font-size: 1rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 0.4rem; }
+        .step p { font-size: 0.85rem; color: var(--text-light); line-height: 1.6; }
+
+        /* ── DAILY LIFE ── */
+        .daily-life {
+            background: var(--primary-dark);
+            color: #fff;
+        }
+        .daily-life .section-label { color: var(--accent); }
+        .daily-life .section-title { color: #fff; }
+        .daily-life .section-sub { color: rgba(255,255,255,0.7); }
+        .daily-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        .daily-card {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+        }
+        .daily-card h3 {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+        .daily-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        .daily-emoji {
+            font-size: 1.3rem;
+            margin-bottom: 0.6rem;
+        }
+
+        /* ── LOCATION / MAP ── */
+        .location-section { background: var(--bg-alt); }
+        .map-wrapper {
+            margin-top: 2.5rem;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            height: 350px;
+        }
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .location-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .location-info-card {
+            background: #fff;
+            padding: 1.2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+        .location-info-card h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.2rem;
+        }
+        .location-info-card p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* ── FAQ ── */
+        .faq-list {
+            margin-top: 2.5rem;
+            max-width: 700px;
+        }
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 1.2rem 0;
+        }
+        .faq-item:first-child { border-top: 1px solid var(--border); }
+        .faq-q {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--primary-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-q::after {
+            content: "+";
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--accent);
+            transition: transform 0.2s;
+        }
+        .faq-item.open .faq-q::after { content: "-"; }
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        .faq-item.open .faq-a {
+            max-height: 200px;
+            padding-top: 0.8rem;
+        }
+
+        /* ── FINAL CTA ── */
+        .final-cta { text-align: center; background: linear-gradient(170deg, var(--bg) 0%, var(--accent-light) 100%); padding: 6rem 2rem; }
+        .final-cta h2 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; color: var(--primary-dark); margin-bottom: 1rem; }
+        .final-cta p { font-size: 1.05rem; color: var(--text-light); max-width: 500px; margin: 0 auto 2rem; }
+
+        /* ── FOOTER ── */
+        footer { background: var(--primary-dark); color: rgba(255,255,255,0.6); padding: 2.5rem 2rem; text-align: center; font-size: 0.85rem; }
+        footer a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        footer .footer-links { margin-bottom: 1rem; display: flex; justify-content: center; gap: 2rem; }
+
+        /* ── MODAL ── */
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 200; justify-content: center; align-items: center; padding: 1rem; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: #fff; border-radius: 16px; width: 100%; max-width: 540px; max-height: 90vh; overflow-y: auto; padding: 2.5rem; position: relative; }
+        .modal-cløse { position: absolute; top: 1rem; right: 1rem; background: var(--bg-alt); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; color: var(--text-light); transition: background 0.2s; }
+        .modal-close:hover { background: var(--border); }
+        .modal h2 { font-size: 1.5rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 0.3rem; }
+        .modal .modal-sub { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.8rem; }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--primary-dark); margin-bottom: 0.35rem; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.7rem 0.9rem; border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 0.9rem; color: var(--text); transition: border-color 0.2s; background: #fff; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--accent); }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-submit { width: 100%; padding: 0.85rem; background: var(--primary); color: #fff; border: none; border-radius: 10px; font-size: 1rem; font-weight: 700; font-family: inherit; cursor: pointer; margin-top: 0.5rem; transition: background 0.2s; }
+        .form-submit:hover { background: var(--primary-light); }
+        .form-success { display: none; text-align: center; padding: 2rem 0; }
+        .form-success.active { display: block; }
+        .form-success .checkmark { width: 64px; height: 64px; background: var(--success); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; font-size: 1.8rem; color: #fff; }
+        .form-hint { font-size: 0.78rem; color: var(--text-light); margin-top: 0.25rem; }
+        .form-validation-msg { font-size: 0.8rem; color: #e74c3c; margin-top: 0.5rem; display: none; }
+        .form-validation-msg.show { display: block; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .hamburger { display: block; }
+            nav ul.open { display: flex; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: #fff; border-bottom: 1px solid var(--border); padding: 1rem 2rem; gap: 1rem; }
+            .about-grid, .spain-grid, .roles-grid { grid-template-columns: 1fr; }
+            .benefits-grid, .daily-grid { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr 1fr; }
+            .location-info { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .hero-badges { gap: 0.8rem; }
+        }
+        @media (max-width: 480px) {
+            .process-steps { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="logo">People<span>Care</span></div>
+    <button class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('open')">
+        <span></span><span></span><span></span>
+    </button>
+    <ul>
+        <li><a href="#om">Om os</a></li>
+        <li><a href="#spanien">Livet i Spanien</a></li>
+        <li class="nav-dropdown">
+            <a href="#stillinger" class="nav-dropdown-toggle">Stillinger</a>
+            <div class="nav-dropdown-menu">
+                <a href="kundeservice.html">Kundeservice Rådgiver</a>
+                <a href="hr-konsulent.html">HR-konsulent</a>
+            </div>
+        </li>
+        <li><a href="#fordele">Fordele</a></li>
+        <li><a href="#lokation">Lokation</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#" class="nav-cta" onclick="openModal(); return false;">Søg nu</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <p class="section-label">Karriere i Spanien</p>
+        <h1>Arbejd med kundeservice og HR — fra solkysten i Spanien</h1>
+        <p>People Care søger dygtige dansktalende medarbejdere til vores kontor i Fuengirola. Bliv en del af et voksende team, der leverer kundeservice- og HR-løsninger for nordiske virksomheder.</p>
+        <a href="#" class="btn btn-primary" onclick="openModal(); return false;">Send din ansøgning</a>
+        <div class="hero-badges">
+            <div class="badge"><strong>Fuengirola,</strong> Spanien</div>
+            <div class="badge"><strong>Dansktalende</strong> team</div>
+            <div class="badge"><strong>Kundeservice</strong> & HR</div>
+            <div class="badge"><strong>Intet salg</strong> — kun service</div>
+        </div>
+    </div>
+</section>
+
+<!-- OM OS -->
+<section class="about" id="om">
+    <div class="container">
+        <p class="section-label">Om People Care</p>
+        <h2 class="section-title">Hvem er vi?</h2>
+        <p class="section-sub">People Care er et bureau der leverer professionel kundeservice og HR-løsninger for virksomheder i Norden — fra vores kontor i det solrige Sydspanien.</p>
+        <div class="about-grid">
+            <div class="about-card">
+                <div class="about-icon">📞</div>
+                <h3>Kundeservice</h3>
+                <p>Vi bemander professionelle kundeserviceteams for virksomheder på tværs af brancher. Telefon, chat og email — vi håndterer det hele fra Fuengirola.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">👥</div>
+                <h3>HR-løsninger</h3>
+                <p>Fra rekruttering til onboarding og medarbejdertrivsel. Vi hjælper nordiske virksomheder med at opbygge stærke teams.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">📈</div>
+                <h3>I kraftig vækst</h3>
+                <p>Vi er et nyt og hurtigt voksende bureau, der søger medarbejdere fra dag ét. Der er masser af muligheder for at være med til at forme virksomheden.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-icon">🌍</div>
+                <h3>Nordisk DNA, spansk base</h3>
+                <p>Vi kombinerer nordisk arbejdskultur med livet i Spanien. Du får det bedste fra begge verdener — professionalisme og livskvalitet.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LIVET I SPANIEN -->
+<section class="spain-highlight" id="spanien">
+    <div class="container">
+        <p class="section-label">Livet i Spanien</p>
+        <h2 class="section-title">Hvorfor Fuengirola?</h2>
+        <p class="section-sub">Dit nye kontor ligger på Costa del Sol — en af Europas mest populære destinationer at bo og arbejde.</p>
+        <div class="spain-grid">
+            <div class="spain-card">
+                <div class="spain-emoji">☀️</div>
+                <h3>320+ solskinsdage om aret</h3>
+                <p>Slut med mørke vintre. Nyd mildt klima året rundt, med gennemsnitstemperaturer på 18-30 grader.</p>
+            </div>
+            <div class="spain-card">
+                <div class="spain-emoji">🏖️</div>
+                <h3>Strand og natur</h3>
+                <p>Kilometerlange sandstrande lige om hjørnét. Vandring i bjergene, golfbaner og havsport — alt er tæt på.</p>
+            </div>
+            <div class="spain-card">
+                <div class="spain-emoji">💰</div>
+                <h3>Lavere leveomkostninger</h3>
+                <p>Husleje, mad og transport er markant billigere end i Danmark. Din løn rækker længere her.</p>
+            </div>
+            <div class="spain-card">
+                <div class="spain-emoji">🍷</div>
+                <h3>Livskvalitet i topklasse</h3>
+                <p>Fantastisk mad, afslappet tempo og en kultur der prioriterer livsnydelelse. Work-life balance på sit bedste.</p>
+            </div>
+            <div class="spain-card">
+                <div class="spain-emoji">✈️</div>
+                <h3>Nem rejseforbindelse</h3>
+                <p>Malaga lufthavn er 20 minutter væk med direkte fly til København, Oslo og Stockholm. Du er aldrig langt fra familien.</p>
+            </div>
+            <div class="spain-card">
+                <div class="spain-emoji">🏥</div>
+                <h3>Infrastruktur på plads</h3>
+                <p>Fuengirola har alt — hospitaler, supermarkeder, internationale skoler, restauranter og et aktivt expat-miljø.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- STILLINGER -->
+<section id="stillinger">
+    <div class="container">
+        <p class="section-label">Ledige stillinger</p>
+        <h2 class="section-title">Hvad søger vi?</h2>
+        <p class="section-sub">Vi søger dansktalende medarbejdere til følgende roller på vores kontor i Fuengirola. Det er vigtigt at understrege: der er intet salg involveret — kun service og rådgivning.</p>
+        <div class="roles-grid">
+            <div class="role-card">
+                <div class="role-tag">Kundeservice</div>
+                <h3>Kundeservice Rådgiver</h3>
+                <p>Du bliver førstepunktet for vores kunders kunder. Via telefon, email og chat hjælper du med at løse problemer hurtigt og professionelt. Ingen salg — kun service.</p>
+                <ul>
+                    <li>Flydende dansk (skrift og tale)</li>
+                    <li>Serviceorienteret og imødekommende</li>
+                    <li>Erfaring med kundeservice er et plus</li>
+                    <li>Bosat i Spanien eller klar til at flytte</li>
+                </ul>
+                <a href="kundeservice.html" class="role-link">Læs fuld jobbeskrivelse &rarr;</a>
+            </div>
+            <div class="role-card">
+                <div class="role-tag">HR</div>
+                <h3>HR-konsulent</h3>
+                <p>Du arbejder med rekruttering, onboarding og medarbejdertrivsel for vores kunders organisationer i Norden.</p>
+                <ul>
+                    <li>Flydende dansk (skrift og tale)</li>
+                    <li>Interesse for mennesker og HR</li>
+                    <li>Struktureret og selvstændig</li>
+                    <li>Bosat i Spanien eller klar til at flytte</li>
+                </ul>
+                <a href="hr-konsulent.html" class="role-link">Læs fuld jobbeskrivelse &rarr;</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FORDELE -->
+<section class="about" id="fordele">
+    <div class="container">
+        <p class="section-label">Hvorfor People Care?</p>
+        <h2 class="section-title">Det får du hos os</h2>
+        <p class="section-sub">Vi gør vores bedste for at skabe en arbejdsplads hvor du trives, udvikler dig og nyder livet i Spanien.</p>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-number">1</div>
+                <h3>Dansk arbejdskultur</h3>
+                <p>Flat struktur, åbenhed og tillid. Vi tager det bedste fra den nordiske arbejdsmodel med til Spanien.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-number">2</div>
+                <h3>Grundig oplæring</h3>
+                <p>Du får en struktureret onboarding, så du er tryg og klar fra dag ét — uanset erfaring.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-number">3</div>
+                <h3>Vaer med fra starten</h3>
+                <p>Vi er i opstart, så du har reel indflydelse på hvordan tingene formes. Dit input tæller.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-number">4</div>
+                <h3>Godt arbejdsmiljø</h3>
+                <p>Et lille, tæt team med sociale arrangementer, fælles frokost og god stemning.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-number">5</div>
+                <h3>Karrieremuligheder</h3>
+                <p>Når vi vokser, vokser du med. Start som rådgiver og bliv teamleder eller specialist.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-number">6</div>
+                <h3>Livet i solen</h3>
+                <p>Byt regnen ud med solskin. Nyd stranden efter arbejde og en helt anden livskvalitet.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EN TYPISK DAG -->
+<section class="daily-life">
+    <div class="container">
+        <p class="section-label">Hverdagen</p>
+        <h2 class="section-title">En typisk dag hos People Care</h2>
+        <p class="section-sub">Så du kan forestille dig, hvordan dit nye liv ser ud.</p>
+        <div class="daily-grid">
+            <div class="daily-card">
+                <div class="daily-emoji">🌅</div>
+                <h3>Morgen</h3>
+                <p>Du starter dagen med morgensol og kaffe. Kort transport til kontoret i Fuengirola centrum.</p>
+            </div>
+            <div class="daily-card">
+                <div class="daily-emoji">💻</div>
+                <h3>Arbejdsdag</h3>
+                <p>Du hjælper nordiske kunder via telefon, chat og email. Faelles frokost med teamet i pauserne.</p>
+            </div>
+            <div class="daily-card">
+                <div class="daily-emoji">🏖️</div>
+                <h3>Fyraften</h3>
+                <p>Stranden er 5 minutter væk. Tag en dukkert, spis tapas eller nyd solnedgangen med kollegaerne.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROCES -->
+<section class="process" id="proces">
+    <div class="container">
+        <p class="section-label">Sådan foregår det</p>
+        <h2 class="section-title">Din vej ind hos os</h2>
+        <p class="section-sub">Processen er enkel og hurtig — vi respekterer din tid.</p>
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-num">01</div>
+                <h3>Ansogning</h3>
+                <p>Udfyld formularen herunder. Det tager under 2 minutter.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">02</div>
+                <h3>Telefonsamtale</h3>
+                <p>Vi ringer dig op inden for 48 timer til en kort og uformel snak.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">03</div>
+                <h3>Online samtale</h3>
+                <p>Vi tager en dybere samtale over video for at lære hinanden bedre at kende.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">04</div>
+                <h3>Velkommen ombord</h3>
+                <p>Kontrakt, oplæring og din plads på holdet i Fuengirola. Vi hjælper dig i gang.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LOKATION -->
+<section class="location-section" id="lokation">
+    <div class="container">
+        <p class="section-label">Lokation</p>
+        <h2 class="section-title">Fuengirola, Malaga, Spanien</h2>
+        <p class="section-sub">Vores kontor ligger i hjertet af Costa del Sol — en af de mest populære kystbyer i Sydspanien.</p>
+        <div class="map-wrapper">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25590.49735672938!2d-4.643!3d36.544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd72fd50b1e0e8e7%3A0x96071ce6deb8541f!2sFuengirola%2C%20M%C3%A1laga%2C%20Spain!5e0!3m2!1sda!2sdk!4v1700000000000!5m2!1sda!2sdk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="location-info">
+            <div class="location-info-card">
+                <h4>✈️ Malaga Lufthavn</h4>
+                <p>20 min fra kontoret — direkte fly til KBH, Oslo, Stockholm</p>
+            </div>
+            <div class="location-info-card">
+                <h4>🌡️ Gennemsnitstemperatur</h4>
+                <p>18-30°C året rundt — 320+ solskinsdage</p>
+            </div>
+            <div class="location-info-card">
+                <h4>🏖️ Stranden</h4>
+                <p>Kun få minutters gang fra Fuengirola centrum</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+    <div class="container">
+        <p class="section-label">Spørgsmål & svar</p>
+        <h2 class="section-title">Ofte stillede spørgsmål</h2>
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Skal jeg allerede bo i Spanien?</div>
+                <div class="faq-a">Nej, du behøver ikke bo i Spanien endnu. Mange af vores medarbejdere flytter hertil i forbindelse med jobstart. Det vigtigste er, at du er klar til at flytte til Fuengirola-området inden for den nærmeste fremtid.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Hjaelper I med flytning og praktisk?</div>
+                <div class="faq-a">Vi guider dig igennem de praktiske ting — fra NIE-nummer til at finde bolig. Du er ikke alene i processen.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Hvilket sprog arbejder vi pa?</div>
+                <div class="faq-a">Du arbejder primært på dansk, da vores kunder er nordiske virksomheder. Internt i teamet taler vi også dansk. Grundlæggende spansk eller engelsk er et plus, men ikke et krav.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Skal jeg have erfaring med kundeservice?</div>
+                <div class="faq-a">Det er et plus, men ikke et krav. Vi giver dig en grundig oplæring. Det vigtigste er, at du er serviceorienteret, imødekommende og taler flydende dansk.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Hvordan er arbejdstiderne?</div>
+                <div class="faq-a">Vi følger typisk nordiske kontortider tilpasset tidsforskellen. De konkrete vagtplaner aftales ved ansættelse og der er mulighed for både fuld- og deltid.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Er det en spansk eller dansk kontrakt?</div>
+                <div class="faq-a">Du bliver ansat på spanske vilkår, da kontoret er i Spanien. Det betyder også at du betaler spansk skat, som typisk er lavere end dansk.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">Skal jeg sælge noget?</div>
+                <div class="faq-a">Nej — der er absolut intet salg i stillingerne. Du arbejder udelukkende med kundeservice eller HR. Dit job er at hjælpe, rådgive og servicere — ikke at sælge.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+    <div class="container">
+        <h2>Klar til et nyt eventyr?</h2>
+        <p>Send din ansøgning i dag — det tager under 2 minutter. Vi vender tilbage hurtigst muligt.</p>
+        <a href="#" class="btn btn-primary" onclick="openModal(); return false;">Søg stillingen nu</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-links">
+        <a href="mailto:info@peoplecare.dk">info@peoplecare.dk</a>
+    </div>
+    <p>&copy; 2026 People Care · Fuengirola, Spanien · Alle rettigheder forbeholdes</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+    <div class="modal">
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+
+        <div id="form-container">
+            <h2>Søg stillingen</h2>
+            <p class="modal-sub">Udfyld formularen, så kontakter vi dig hurtigst muligt.</p>
+            <form id="apply-form" onsubmit="submitForm(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Fulde navn *</label>
+                        <input type="text" name="name" required placeholder="Dit navn">
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" name="email" required placeholder="din@email.dk">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Telefon *</label>
+                        <input type="tel" name="phone" required placeholder="+45 12 34 56 78">
+                    </div>
+                    <div class="form-group">
+                        <label>Alder</label>
+                        <input type="number" name="age" placeholder="25" min="16" max="70">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Hvilken stilling søger du? *</label>
+                    <select name="position" required>
+                        <option value="">Vælg stilling...</option>
+                        <option value="kundeservice">Kundeservice Rådgiver</option>
+                        <option value="hr">HR-konsulent</option>
+                        <option value="andet">Andet / Åben ansøgning</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Ønsket start *</label>
+                    <select name="start" required>
+                        <option value="">Vælg...</option>
+                        <option value="asap">Hurtigst muligt</option>
+                        <option value="1month">Inden for 1 måned</option>
+                        <option value="3months">Inden for 3 måneder</option>
+                        <option value="6months">Inden for 6 måneder</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Bor du i Spanien, eller er du klar til at flytte? *</label>
+                    <select name="spain_status" required>
+                        <option value="">Vælg...</option>
+                        <option value="bor_i_spanien">Jeg bor allerede i Spanien</option>
+                        <option value="klar_til_flytning">Jeg er klar til at flytte til Spanien</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>LinkedIn profil</label>
+                    <input type="url" name="linkedin" id="linkedin-input" placeholder="https://linkedin.com/in/dit-navn" oninput="checkCvLinkedin()">
+                </div>
+                <div class="form-group">
+                    <label>Upload CV</label>
+                    <input type="file" name="cv" id="cv-input" accept=".pdf,.doc,.docx" onchange="checkCvLinkedin()">
+                    <p class="form-hint">Du skal udfylde enten LinkedIn eller uploade dit CV (eller begge).</p>
+                    <p class="form-validation-msg" id="cv-linkedin-error">Udfyld venligst enten din LinkedIn profil eller upload dit CV.</p>
+                </div>
+                <button type="submit" class="form-submit">Send ansøgning</button>
+            </form>
+        </div>
+
+        <div class="form-success" id="form-success">
+            <div class="checkmark">✓</div>
+            <h2>Tak for din ansøgning!</h2>
+            <p style="color:var(--text-light); margin-top:0.5rem;">Vi har modtaget din ansøgning og vender tilbage inden for 48 timer.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ── MODAL ──
+    function openModal() {
+        document.getElementById('modal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+        document.getElementById('modal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    document.getElementById('modal').addEventListener('click', function(e) {
+        if (e.target === this) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeModal();
+    });
+
+    // ── CV / LINKEDIN VALIDATION ──
+    function checkCvLinkedin() {
+        const linkedin = document.getElementById('linkedin-input').value.trim();
+        const cv = document.getElementById('cv-input').files.length > 0;
+        const msg = document.getElementById('cv-linkedin-error');
+        if (linkedin || cv) {
+            msg.classList.remove('show');
+        }
+    }
+
+    // ── FORM SUBMIT ──
+    // SETUP: Indsæt din Google Apps Script URL herunder.
+    // Apps Script'et håndterer BÅDE Google Sheets OG Slack-notifikation (se SETUP-guide).
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzmcGH11MRaMTV4EQP8cPpit02qW7GF20UBl9KtaQR_99ECam-3T23odNbcCTzZQ8u95g/exec';
+
+    async function submitForm(e) {
+        e.preventDefault();
+        const form = e.target;
+
+        // Validate CV or LinkedIn
+        const linkedin = document.getElementById('linkedin-input').value.trim();
+        const cv = document.getElementById('cv-input').files.length > 0;
+        if (!linkedin && !cv) {
+            document.getElementById('cv-linkedin-error').classList.add('show');
+            return;
+        }
+
+        const btn = form.querySelector('.form-submit');
+        btn.textContent = 'Sender...';
+        btn.disabled = true;
+
+        const data = new FormData(form);
+        const obj = {};
+        data.forEach((v, k) => { if (k !== 'cv') obj[k] = v; });
+
+        // Tilføj labels til select-værdier for Slack-besked
+        const positionLabels = { kundeservice: 'Kundeservice Rådgiver', hr: 'HR-konsulent', andet: 'Andet / Åben ansøgning' };
+        const startLabels = { asap: 'Hurtigst muligt', '1month': 'Inden for 1 måned', '3months': 'Inden for 3 måneder', '6months': 'Inden for 6 måneder' };
+        const spainLabels = { bor_i_spanien: 'Bor allerede i Spanien', klar_til_flytning: 'Klar til at flytte til Spanien' };
+        obj.position_label = positionLabels[obj.position] || obj.position;
+        obj.start_label = startLabels[obj.start] || obj.start;
+        obj.spain_status_label = spainLabels[obj.spain_status] || obj.spain_status;
+
+        if (GOOGLE_SCRIPT_URL) {
+            try {
+                await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(obj)
+                });
+            } catch (err) {
+                console.log('Form data:', obj);
+            }
+        } else {
+            console.log('Form data (no Google Script configured):', obj);
+        }
+
+        document.getElementById('form-container').style.display = 'none';
+        document.getElementById('form-success').classList.add('active');
+
+        setTimeout(() => {
+            closeModal();
+            document.getElementById('form-container').style.display = '';
+            document.getElementById('form-success').classList.remove('active');
+            form.reset();
+            btn.textContent = 'Send ansøgning';
+            btn.disabled = false;
+        }, 3000);
+    }
+
+    // ── FAQ TOGGLE ──
+    function toggleFaq(el) {
+        el.parentElement.classList.toggle('open');
+    }
+
+    // ── SMOOTH SCROLL ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function(e) {
+            const id = this.getAttribute('href');
+            if (id === '#') return;
+            e.preventDefault();
+            document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.querySelector('nav ul').classList.remove('open');
+        });
+    });
+</script>
+
+</body>
+</html>
