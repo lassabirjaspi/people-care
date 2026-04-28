@@ -289,9 +289,9 @@
     <div class="container">
         <div class="job-tag">HR</div>
         <h1>HR-konsulent</h1>
-        <p class="subtitle">Arbejd med rekruttering, onboarding og medarbejdertrivsel for nordiske virksomheder — fra vores kontor i Fuengirola, Spanien. Intet salg, kun mennesker og HR.</p>
+        <p class="subtitle">Arbejd med rekruttering, onboarding og medarbejdertrivsel for nordiske virksomheder — fra vores kontor i Lissabon, Portugal. Intet salg, kun mennesker og HR.</p>
         <div class="job-meta">
-            <div class="job-meta-item"><strong>Lokation:</strong> Fuengirola, Spanien</div>
+            <div class="job-meta-item"><strong>Lokation:</strong> Lissabon, Portugal</div>
             <div class="job-meta-item"><strong>Type:</strong> Fuldtid / Deltid</div>
             <div class="job-meta-item"><strong>Sprog:</strong> Flydende dansk</div>
             <div class="job-meta-item"><strong>Salg:</strong> Intet salg</div>
@@ -311,7 +311,7 @@
                 <div class="content-section">
                     <h2>Om rollen</h2>
                     <p>Som HR-konsulent hos People Care arbejder du med det, der betyder mest — mennesker. Du hjælper vores kunders virksomheder i Norden med rekruttering, onboarding, medarbejdertrivsel og generel HR-rådgivning.</p>
-                    <p>Du sidder på vores kontor i Fuengirola i et dansk-ledet team med en uformel og tillidsbaseret kultur. Du bliver en vigtig del af at opbygge HR-funktionen fra bunden, og din indsats gør en reel forskel fra dag ét.</p>
+                    <p>Du sidder på vores kontor i Lissabon i et dansk-ledet team med en uformel og tillidsbaseret kultur. Du bliver en vigtig del af at opbygge HR-funktionen fra bunden, og din indsats gør en reel forskel fra dag ét.</p>
 
                     <div class="highlight-box">
                         <h3>Vigtigt: Der er intet salg i denne stilling</h3>
@@ -340,7 +340,7 @@
                         <li>Struktureret, grundig og selvstændig i dit arbejde</li>
                         <li>God til at kommunikere empatisk og professionelt</li>
                         <li>Komfortabel med at arbejde med flere opgaver og kunder samtidig</li>
-                        <li>Bor i Spanien allerede, eller er klar til at flytte til Fuengirola-området</li>
+                        <li>Bor i Portugal allerede, eller er klar til at flytte til Lissabon-området</li>
                     </ul>
                     <p>Erfaring med HR er et plus, men ikke et krav. Det vigtigste er, at du har en naturlig interesse for mennesker og er villig til at lære. Vi giver dig en grundig oplæring.</p>
                 </div>
@@ -353,8 +353,8 @@
                         <li>Mulighed for at forme HR-funktionen fra bunden</li>
                         <li>Karrieremuligheder i takt med at vi vokser — bliv HR-lead eller specialist</li>
                         <li>Et godt arbejdsmiljø med sociale arrangementer og fællesskab</li>
-                        <li>Livet i Spanien — sol, strand og en helt anden livskvalitet</li>
-                        <li>Spansk ansættelseskontrakt med typisk lavere skat end i Danmark</li>
+                        <li>Livet i Portugal — sol, kultur og en helt anden livskvalitet</li>
+                        <li>Portugisisk ansættelseskontrakt med attraktive skatteforhold</li>
                     </ul>
                 </div>
 
@@ -389,7 +389,7 @@
                     </div>
                     <div class="sidebar-item">
                         <span class="label">Lokation</span>
-                        <span class="value">Fuengirola, Spanien</span>
+                        <span class="value">Lissabon, Portugal</span>
                     </div>
                     <div class="sidebar-item">
                         <span class="label">Type</span>
@@ -418,7 +418,7 @@
     <div class="footer-links">
         <a href="mailto:info@peoplecare.dk">info@peoplecare.dk</a>
     </div>
-    <p>&copy; 2026 People Care · Fuengirola, Spanien · Alle rettigheder forbeholdes</p>
+    <p>&copy; 2026 People Care · Lissabon, Portugal · Alle rettigheder forbeholdes</p>
 </footer>
 
 <!-- MODAL -->
@@ -469,11 +469,11 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Bor du i Spanien, eller er du klar til at flytte? *</label>
-                    <select name="spain_status" required>
+                    <label>Bor du i Portugal, eller er du klar til at flytte? *</label>
+                    <select name="portugal_status" required>
                         <option value="">Vælg...</option>
-                        <option value="bor_i_spanien">Jeg bor allerede i Spanien</option>
-                        <option value="klar_til_flytning">Jeg er klar til at flytte til Spanien</option>
+                        <option value="bor_i_portugal">Jeg bor allerede i Portugal</option>
+                        <option value="klar_til_flytning">Jeg er klar til at flytte til Portugal</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -540,10 +540,10 @@
         data.forEach((v, k) => { if (k !== 'cv') obj[k] = v; });
         const positionLabels = { kundeservice: 'Kundeservice Rådgiver', hr: 'HR-konsulent', andet: 'Andet / Åben ansøgning' };
         const startLabels = { asap: 'Hurtigst muligt', '1month': 'Inden for 1 måned', '3months': 'Inden for 3 måneder', '6months': 'Inden for 6 måneder' };
-        const spainLabels = { bor_i_spanien: 'Bor allerede i Spanien', klar_til_flytning: 'Klar til at flytte til Spanien' };
+        const portugalLabels = { bor_i_portugal: 'Bor allerede i Portugal', klar_til_flytning: 'Klar til at flytte til Portugal' };
         obj.position_label = positionLabels[obj.position] || obj.position;
         obj.start_label = startLabels[obj.start] || obj.start;
-        obj.spain_status_label = spainLabels[obj.spain_status] || obj.spain_status;
+        obj.portugal_status_label = portugalLabels[obj.portugal_status] || obj.portugal_status;
         if (GOOGLE_SCRIPT_URL) {
             try {
                 await fetch(GOOGLE_SCRIPT_URL, {
